@@ -1,0 +1,17 @@
+h1 {
+    color: green;
+}
+
+h2 {
+    margin-bottom: 5px;
+}
+
+#formdiv {
+    opacity: 0%;
+    pointer-events: none;
+    position: relative;
+}
+
+#logindiv {
+    position: relative;
+}
