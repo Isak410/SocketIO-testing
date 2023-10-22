@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function () {
 const formDiv = document.getElementById('formdiv')
 const loginDiv = document.getElementById('logindiv')
@@ -37,28 +36,40 @@ console.log("script loaded")
       }
     })
 
- 
+    var prevTime = [0,0]
     socket.on('chat message', function (msg) {
-      if (msg.senderID != myId) {
-      var audio = new Audio('../Assets/notif.mp3');
-      audio.play();}
+      console.log(prevTime)
+      if (prevTime[0] != msg.timeOfSend[0]+msg.timeOfSend[1] || prevTime[1] != msg.timeOfSend[3]+msg.timeOfSend[4]){
+        console.log(msg.timeOfSend[0]+msg.timeOfSend[1]+":"+msg.timeOfSend[3]+msg.timeOfSend[4])
+        var timeStamp = document.createElement("p")
+        var timeStampDiv = document.createElement("div")
+        timeStampDiv.id = "timeStampDiv"
+        timeStamp.id = "timeStamp"
+        timeStamp.textContent = (msg.timeOfSend[0]+msg.timeOfSend[1]+":"+msg.timeOfSend[3]+msg.timeOfSend[4])
+        console.log("timeStamp generated - "+msg.timeOfSend)
+        timeStampDiv.appendChild(timeStamp)
+        messageDiv.appendChild(timeStampDiv)
+      }
+      if (!msg.senderID == myId) {playNotification()}
       var message1 = document.createElement('p');
-      message1.textContent = (msg.timeOfSend + " - " + msg.user + " - " + msg.message);
+      prevTime[0] = msg.timeOfSend[0]+msg.timeOfSend[1]
+      prevTime[1] = msg.timeOfSend[3]+msg.timeOfSend[4]
+      message1.textContent = (msg.user + " - " + msg.message);
       message1.id = msg.senderID
       console.log("my id: "+myId)
+      
       if (message1.id == myId) {
+        var myMessageDiv = document.createElement("div")
+        myMessageDiv.id = "mymesdiv"
         message1.className = "myMessage"
-        message1.textContent = (msg.message + " - " + msg.timeOfSend)
-        var br = document.createElement("br")
-        var br1 = document.createElement("br")
-        messageDiv.appendChild(message1);
-        messageDiv.appendChild(br)
-        messageDiv.appendChild(br1)
+        message1.textContent = (msg.message)
+        myMessageDiv.appendChild(message1)
+        messageDiv.appendChild(myMessageDiv);
       } else {
         messageDiv.appendChild(message1)
       }
-      
-      
+      var scrollableDiv = document.getElementById('messages');
+      scrollableDiv.scrollTop = scrollableDiv.scrollHeight;
     });
     usernameButton.addEventListener('click', submitUsername)
   });
@@ -72,4 +83,9 @@ function getTime() {
   var sekunder = dato.getSeconds()
   if (sekunder < 10) {sekunder = "0"+sekunder}
   return ([time, minutter, sekunder])
+}
+
+function playNotification() {
+  var audio = new Audio('../Assets/notif.mp3');
+  audio.play();
 }
