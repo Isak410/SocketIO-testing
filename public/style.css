@@ -3,15 +3,46 @@ h1 {
 }
 
 h2 {
-    margin-bottom: 5px;
+    margin: 5px;
 }
 
 #formdiv {
     opacity: 0%;
     pointer-events: none;
     position: relative;
+    width: 500px;
+    border: solid;
+}
+
+#formdiv h2 {
+    text-align: center;
 }
 
 #logindiv {
     position: relative;
+}
+
+#form {
+    width: 100%;
+}
+
+form input {
+    width: 430px;
+}
+form button {
+    width: 62px;
+}
+p {
+    padding: 2px;
+    padding-right: 4px;
+    margin: 3px;
+    border-radius: 3px;
+    background-color: rgb(167, 167, 167);
+    width: fit-content;
+}
+
+.myMessage {
+    position: absolute;
+    right: 0;
+    background-color: aquamarine;
 }

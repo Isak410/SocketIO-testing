@@ -4,13 +4,13 @@ const formDiv = document.getElementById('formdiv')
 const loginDiv = document.getElementById('logindiv')
 const usernameButton = document.getElementById('usernamebutton')
 const usernameInput = document.getElementById('usernameinput')
+const messageDiv = document.getElementById('messages')
 var myId = -1
 console.log("script loaded")
     var socket = io();
 
     var form = document.getElementById('form');
     var input = document.getElementById('m');
-    var messages = document.getElementById('messages');
 
     function submitUsername() {
       if (usernameInput.value != "") {
@@ -42,9 +42,23 @@ console.log("script loaded")
       if (msg.senderID != myId) {
       var audio = new Audio('../Assets/notif.mp3');
       audio.play();}
-      var listItem = document.createElement('li');
-      listItem.textContent = (msg.timeOfSend + " - " + msg.user + " - " + msg.message);
-      messages.appendChild(listItem);
+      var message1 = document.createElement('p');
+      message1.textContent = (msg.timeOfSend + " - " + msg.user + " - " + msg.message);
+      message1.id = msg.senderID
+      console.log("my id: "+myId)
+      if (message1.id == myId) {
+        message1.className = "myMessage"
+        message1.textContent = (msg.message + " - " + msg.timeOfSend)
+        var br = document.createElement("br")
+        var br1 = document.createElement("br")
+        messageDiv.appendChild(message1);
+        messageDiv.appendChild(br)
+        messageDiv.appendChild(br1)
+      } else {
+        messageDiv.appendChild(message1)
+      }
+      
+      
     });
     usernameButton.addEventListener('click', submitUsername)
   });
