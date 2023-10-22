@@ -81,3 +81,23 @@ body {
     display: flex;
     justify-content: center;
 }
+
+#userInterface {
+    width: 150px;
+    height: 250px;
+    overflow-x:hidden;
+    overflow-y: auto;
+    border: solid gray;
+    opacity: 0;
+    border-radius: 3px;
+}
+
+#userInterface p {
+    width: fit-content;
+    background-color: transparent;
+    margin: 2px;
+    padding: 0;
+    font-size: 0.7em;
+    word-wrap: break-word;
+    max-width: 144px;
+}

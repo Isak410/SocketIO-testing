@@ -4,6 +4,7 @@ const loginDiv = document.getElementById('logindiv')
 const usernameButton = document.getElementById('usernamebutton')
 const usernameInput = document.getElementById('usernameinput')
 const messageDiv = document.getElementById('messages')
+const userInterfaceDiv = document.getElementById('userInterface')
 var myId = -1
 console.log("script loaded")
     var socket = io();
@@ -15,6 +16,7 @@ console.log("script loaded")
       if (usernameInput.value != "") {
       formDiv.style.pointerEvents = "all"
       formDiv.style.opacity = "100%"
+      userInterfaceDiv.style.opacity = "100%"
       loginDiv.style.pointerEvents = "none"
       loginDiv.style.opacity = "0%"
       socket.emit('newUser', [myId, usernameInput.value])
@@ -35,6 +37,24 @@ console.log("script loaded")
         console.log(myId)
       }
     })
+
+    socket.on('userhasconnected', function (connectedUsername) {
+      if (connectedUsername != null){
+        console.log("User: "+connectedUsername+" has connected");
+        var discon = document.createElement('p')
+        discon.textContent = (connectedUsername+" has connected")
+        userInterfaceDiv.appendChild(discon)
+        userInterfaceDiv.scrollTop = userInterfaceDiv.scrollHeight;}
+    })
+
+    socket.on('user_disconnect', function (disconnectedUserId) {
+      if (disconnectedUserId != null){
+      console.log("User: "+disconnectedUserId+" has disconnected");
+      var discon = document.createElement('p')
+      discon.textContent = (disconnectedUserId+" has disconnected")
+      userInterfaceDiv.appendChild(discon)
+      userInterfaceDiv.scrollTop = userInterfaceDiv.scrollHeight;}
+    });
 
     var prevTime = [0,0]
     socket.on('chat message', function (msg) {
