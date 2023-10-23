@@ -9,11 +9,14 @@
 </head>
 <body>
     <div id="logindiv">
-      <h2>Select username:</h2>
-      <input type="text" id="usernameinput" placeholder="Select your username">
+      <h2>Select username</h2> <br>
+      <input type="text" id="usernameinput" placeholder="Select your username"> <br>
       <button id="usernamebutton">Submit</button>
     </div>
     <div id="formdiv">
+      <div id="totalUsers">
+        <p id="usersCon">0 Users connected</p>
+      </div>
       <h2>Global Chat</h2>
     <div id="messages"></div>
     <form id="form" action="">
@@ -21,6 +24,7 @@
     </form>
     </div>
     <div id="userInterface">
+      
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/script.js">

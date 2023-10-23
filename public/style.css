@@ -11,6 +11,7 @@ h2 {
     pointer-events: none;
     position: relative;
     width: 500px;
+    min-width: 500px;
     border: solid;
     border-radius: 3px;
 }
@@ -20,7 +21,24 @@ h2 {
 }
 
 #logindiv {
+
+    background-size: contain;
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid gray 2px;
+    padding: 5px;
+    padding-bottom: 10px;
+    border-radius: 4px;
+}
+
+#logindiv button {
+    width: fit-content;
+    background-color: rgb(45, 189, 45);
+    color: white;
+    border-radius: 5px;
+    border: 0;
 }
 
 #form {
@@ -84,6 +102,7 @@ body {
 
 #userInterface {
     width: 150px;
+    min-width: 150px;
     height: 250px;
     overflow-x:hidden;
     overflow-y: auto;
@@ -100,4 +119,15 @@ body {
     font-size: 0.7em;
     word-wrap: break-word;
     max-width: 144px;
+}
+
+#totalUsers {
+    position: absolute;
+    height: fit-content;
+    width: fit-content;
+}
+
+#totalUsers p {
+    background-color: transparent;
+    size: 0.7em;
 }
